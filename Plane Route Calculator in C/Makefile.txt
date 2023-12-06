@@ -1,0 +1,19 @@
+CC = gcc
+CFLAGS = -Wall -g
+TARGET = myprogram
+SRCS = main.c planerecords.c
+OBJS = $(SRCS:.c=.o)
+HEADERS = planerecords.h
+DATA_FILE = data.csv
+
+$(TARGET): $(OBJS)
+    $(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+
+%.o: %.c $(HEADERS)
+    $(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+    rm -f $(TARGET) $(OBJS)
+
+run: $(TARGET)
+    ./$(TARGET) $(DATA_FILE)
